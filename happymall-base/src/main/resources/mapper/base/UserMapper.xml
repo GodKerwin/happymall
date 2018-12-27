@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xul.happymall.base.dao.UserDao">
+
+    <update id="updatePasswordByUsername">
+        update happymall_user set password = #{password}, updateTime = CURRENT_TIMESTAMP where username = #{username}
+    </update>
+
+    <update id="updateLastLoginTimeByUsername">
+        update happymall_user set lastLoginTime = #{lastLoginTime}, updateTime = CURRENT_TIMESTAMP where username = #{username}
+    </update>
+
+    <update id="updateInformation">
+        update happymall_user
+        <set>
+            <if test="email != null and email != ''">email = #{email},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="question != null and question != ''">question = #{question},</if>
+            <if test="answer != null and answer != ''">answer = #{answer},</if>
+            updateTime = CURRENT_TIMESTAMP
+        </set>
+        <where>
+            username = #{username}
+        </where>
+    </update>
+
+</mapper>

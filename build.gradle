@@ -1,0 +1,56 @@
+apply from: "config.gradle"
+buildscript {
+    ext {
+        springBootVersion = '1.5.9.RELEASE'
+    }
+    repositories {
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    sourceCompatibility = 1.8
+
+    repositories {
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+        mavenCentral()
+    }
+
+    dependencies {
+        compile(
+                //springboot官方包
+                "org.springframework.boot:spring-boot-starter-web",
+                "org.springframework.boot:spring-boot-starter-data-jpa",
+                "org.springframework.boot:spring-boot-starter-aop",
+                "org.springframework.boot:spring-boot-starter-data-redis",
+                //session
+                "org.springframework.session:spring-session-data-redis",
+                //mysql数据库
+                "org.mybatis.spring.boot:mybatis-spring-boot-starter:${MYBATIS_VERSION}",
+                "mysql:mysql-connector-java",
+                //邮件
+                "javax.mail:mail:${JAVAX_MAIL_VERSION}",
+                //json
+                "com.alibaba:fastjson:${FASTJSON_VERSION}",
+                //工具
+                "org.apache.commons:commons-lang3:${APACHE_VERSION}",
+                //swagger接口文档
+                "io.springfox:springfox-swagger-ui:${SWAGGER_VERSION}",
+                "io.springfox:springfox-swagger2:${SWAGGER_VERSION}",
+        )
+        testCompile(
+                "org.springframework.boot:spring-boot-starter-test",
+                "junit:junit:${JUNIT_VERSION}"
+        )
+    }
+}

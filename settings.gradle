@@ -1,0 +1,5 @@
+rootProject.name = 'happymall'
+include 'happymall-base'
+include 'happymall-portal'
+include 'happymall-admin'
+

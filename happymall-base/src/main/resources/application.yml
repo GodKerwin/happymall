@@ -1,0 +1,34 @@
+server:
+  port: 9002
+  context-path: /happymall/base/
+  session:
+    timeout: 1800
+
+spring:
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://${mysqlServer.server}/happymall?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
+    username: ${mysqlServer.username}
+    password: ${mysqlServer.password}
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+  session:
+    store-type: redis
+  redis:
+    host: ${redisServer.host}
+    port: ${redisServer.port}
+
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.xul.happymall.base.domain
+  type-handlers-package: com.xul.happymall.base.dao
+  configuration:
+      map-underscore-to-camel-case: true
+      default-fetch-size: 100
+      default-statement-timeout: 30
