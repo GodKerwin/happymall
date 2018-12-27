@@ -1,7 +1,7 @@
 package com.xul.happymall.base.enums;
 
 /**
- * 支付平台
+ * 支付平台 0-支付宝 1-微信
  * Created by lxu on 2018/12/11.
  */
 public enum PayPlatformType {
@@ -11,8 +11,8 @@ public enum PayPlatformType {
     //微信
     WX(1, "WX");
 
-    private int value;
-    private String name;
+    private final int value;
+    private final String name;
 
     PayPlatformType(int value, String name) {
         this.value = value;
@@ -23,16 +23,8 @@ public enum PayPlatformType {
         return value;
     }
 
-    public void setValue(int value) {
-        this.value = value;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override

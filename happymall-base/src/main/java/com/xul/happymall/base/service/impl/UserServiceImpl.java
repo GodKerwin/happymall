@@ -4,6 +4,7 @@ import com.xul.happymall.base.dao.UserDao;
 import com.xul.happymall.base.domain.User;
 import com.xul.happymall.base.enums.DelStatus;
 import com.xul.happymall.base.enums.ExceptionEnum;
+import com.xul.happymall.base.repository.RoleRepository;
 import com.xul.happymall.base.repository.UserRepository;
 import com.xul.happymall.base.service.IUserService;
 import com.xul.happymall.base.support.constant.HappymallConstant;
@@ -31,6 +32,8 @@ public class UserServiceImpl implements IUserService {
     @Resource
     private UserRepository userRepository;
     @Resource
+    private RoleRepository roleRepository;
+    @Resource
     private RedisUtil redisUtil;
 
     @Override
@@ -51,8 +54,7 @@ public class UserServiceImpl implements IUserService {
         User user = transDTOToModel(userDTO);
         this.checkExist(user.getUsername(), HappymallConstant.CheckValidType.USERNAME);
         this.checkExist(user.getEmail(), HappymallConstant.CheckValidType.EMAIL);
-        //TODO 从角色表查询
-        user.setRoleId(HappymallConstant.DEFAULF_ROLE);
+        user.setRoleId(HappymallConstant.Role.DEFAULF_ROLE);
         user.setPassword(MD5Util.encode(user.getPassword()));
         user.setLastLoginTime(new Date());
         user.setDelStatus(DelStatus.NORMAL);
@@ -116,14 +118,14 @@ public class UserServiceImpl implements IUserService {
             throw new HappymallSystemException(ExceptionEnum.ANSWER_ERROR);
         }
         String forgetToken = UUID.randomUUID().toString();
-        redisUtil.set(HappymallConstant.FORGET_TOKEN_PREFIX + username, forgetToken, HappymallConstant.TOKEN_EXPIRE_TIME);
+        redisUtil.set(HappymallConstant.Token.FORGET_TOKEN_PREFIX + username, forgetToken, HappymallConstant.Token.TOKEN_EXPIRE_TIME);
         return forgetToken;
     }
 
     @Override
     public void forgetResetPassword(String username, String newPassword, String forgetToken) {
         this.checkNotExist(username, HappymallConstant.CheckValidType.USERNAME);
-        String token = (String) redisUtil.get(HappymallConstant.FORGET_TOKEN_PREFIX + username);
+        String token = (String) redisUtil.get(HappymallConstant.Token.FORGET_TOKEN_PREFIX + username);
         if (StringUtils.isBlank(token)) {
             throw new HappymallSystemException(ExceptionEnum.TOKEN_EXPIRED);
         }

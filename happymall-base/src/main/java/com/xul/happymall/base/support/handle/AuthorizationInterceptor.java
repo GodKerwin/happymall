@@ -42,7 +42,7 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
 
         //获取用户凭证
         String username = "";
-        String token = request.getHeader(HappymallConstant.USER_TOKEN);
+        String token = request.getHeader(HappymallConstant.Token.USER_TOKEN);
         log.info("token is {}", token);
         if (StringUtils.isNotEmpty(token)) {
             username = (String) redisUtil.get(token);
@@ -54,14 +54,14 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
             log.info("token Birth time is: {}", tokeBirthTime);
             Long diff = System.currentTimeMillis() - tokeBirthTime;
             log.info("token is exist : {} ms", diff);
-            if (diff > HappymallConstant.TOKEN_RESET_TIME) {
-                redisUtil.expire(username, HappymallConstant.TOKEN_EXPIRE_TIME);
-                redisUtil.expire(token, HappymallConstant.TOKEN_EXPIRE_TIME);
+            if (diff > HappymallConstant.Token.TOKEN_RESET_TIME) {
+                redisUtil.expire(username, HappymallConstant.Token.TOKEN_EXPIRE_TIME);
+                redisUtil.expire(token, HappymallConstant.Token.TOKEN_EXPIRE_TIME);
                 log.info("Reset expire time success!");
                 Long newBirthTime = System.currentTimeMillis();
-                redisUtil.set(token + username, newBirthTime, HappymallConstant.TOKEN_RESET_TIME);
+                redisUtil.set(token + username, newBirthTime, HappymallConstant.Token.TOKEN_RESET_TIME);
             }
-            request.setAttribute(HappymallConstant.REQUEST_CURRENT_KEY, username);
+            request.setAttribute(HappymallConstant.Token.REQUEST_CURRENT_KEY, username);
             return true;
         } else {
             JSONObject jsonObject = new JSONObject();
@@ -73,7 +73,7 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
                 jsonObject.put("message", ExceptionEnum.NEED_LOGIN.getMsg());
                 out = response.getWriter();
                 out.println(jsonObject);
-                request.setAttribute(HappymallConstant.REQUEST_CURRENT_KEY, null);
+                request.setAttribute(HappymallConstant.Token.REQUEST_CURRENT_KEY, null);
                 return false;
             } catch (Exception e) {
                 log.error(e.toString());

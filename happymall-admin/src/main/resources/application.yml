@@ -3,20 +3,28 @@ server:
   context-path: /happymall/admin/
 
 spring:
+  profiles:
+    active: dev
   datasource:
-    name: happymall_localhost
-    url: jdbc:mysql://localhost:3306/happymall?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
-    username: root
-    password: rootroot
+    url: jdbc:mysql://${mysqlServer.server}/happymall?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
+    username: ${mysqlServer.username}
+    password: ${mysqlServer.password}
     driver-class-name: com.mysql.jdbc.Driver
-  resources:
-    static-locations: classpath:/webapp/
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+  session:
+    store-type: redis
 
 mybatis:
-  mapper-locations: classpath:mapper/**/**/*.xml
+  mapper-locations: classpath:mapper/**/*.xml
   type-aliases-package: com.xul.happymall.admin.domain
   type-handlers-package: com.xul.happymall.admin.dao
   configuration:
       map-underscore-to-camel-case: true
       default-fetch-size: 100
       default-statement-timeout: 30
+

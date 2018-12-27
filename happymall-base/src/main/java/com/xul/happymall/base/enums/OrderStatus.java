@@ -1,7 +1,7 @@
 package com.xul.happymall.base.enums;
 
 /**
- * 订单状态
+ * 订单状态 0-已取消 1-未付款 2-已付款 3-已发货 4-交易成功 5-交易关闭
  * Created by lxu on 2018/12/11.
  */
 public enum OrderStatus {
@@ -19,8 +19,8 @@ public enum OrderStatus {
     //交易关闭
     CLOSE(5, "CLOSE");
 
-    private int value;
-    private String name;
+    private final int value;
+    private final String name;
 
     OrderStatus(int value, String name) {
         this.value = value;
@@ -31,16 +31,8 @@ public enum OrderStatus {
         return value;
     }
 
-    public void setValue(int value) {
-        this.value = value;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override

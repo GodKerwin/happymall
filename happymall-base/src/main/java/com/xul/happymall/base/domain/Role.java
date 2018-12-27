@@ -1,7 +1,9 @@
 package com.xul.happymall.base.domain;
 
 import com.xul.happymall.base.enums.ActiveStatus;
+import com.xul.happymall.base.enums.DelStatus;
 import com.xul.happymall.base.support.constant.HappymallConstant;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +15,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = HappymallConstant.TABLE_NAME_PREFIX + "role")
+@Where(clause = "delStatus = " + DelStatus.DEFAULT + " and activeStatus = " + ActiveStatus.DEFAULT)
 public class Role extends BaseModel {
 
     /**

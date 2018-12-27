@@ -1,7 +1,7 @@
 package com.xul.happymall.base.enums;
 
 /**
- * 删除状态
+ * 是否删除 0-未删除 1-已删除
  * Created by lxu on 2018/12/11.
  */
 public enum DelStatus {
@@ -11,8 +11,10 @@ public enum DelStatus {
     //已删除
     DEL(1, "DEL");
 
-    private int value;
-    private String name;
+    public static final String DEFAULT = "0";
+
+    private final int value;
+    private final String name;
 
     DelStatus(int value, String name) {
         this.value = value;
@@ -23,16 +25,8 @@ public enum DelStatus {
         return value;
     }
 
-    public void setValue(int value) {
-        this.value = value;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override

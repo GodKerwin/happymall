@@ -1,8 +1,6 @@
 server:
   port: 9002
   context-path: /happymall/base/
-  session:
-    timeout: 1800
 
 spring:
   profiles:

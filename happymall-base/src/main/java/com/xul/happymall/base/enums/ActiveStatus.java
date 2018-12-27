@@ -1,7 +1,7 @@
 package com.xul.happymall.base.enums;
 
 /**
- * 激活状态
+ * 生效状态 0-生效 1-失效
  * Created by lxu on 2018/12/11.
  */
 public enum ActiveStatus {
@@ -11,8 +11,10 @@ public enum ActiveStatus {
     //未生效
     INACTIVE(1, "INACTIVE");
 
-    private int value;
-    private String name;
+    public static final String DEFAULT = "0";
+
+    private final int value;
+    private final String name;
 
     ActiveStatus(int value, String name) {
         this.value = value;
@@ -23,16 +25,8 @@ public enum ActiveStatus {
         return value;
     }
 
-    public void setValue(int value) {
-        this.value = value;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override

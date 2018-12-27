@@ -1,6 +1,9 @@
 package com.xul.happymall.base.domain;
 
+import com.xul.happymall.base.enums.DelStatus;
 import com.xul.happymall.base.support.constant.HappymallConstant;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,6 +14,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = HappymallConstant.TABLE_NAME_PREFIX + "user")
+@Where(clause = "delStatus = " + DelStatus.DEFAULT)
 public class User extends BaseModel {
 
     /**

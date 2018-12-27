@@ -1,5 +1,6 @@
 package com.xul.happymall.base.web;
 
+import com.xul.happymall.base.enums.DelStatus;
 import com.xul.happymall.base.service.IUserService;
 import com.xul.happymall.base.support.annotation.AuthIgnore;
 import com.xul.happymall.base.support.constant.HappymallConstant;
@@ -42,9 +43,9 @@ public class UserController {
             long now = System.currentTimeMillis();
             //token生成规则：用户名+密码+时间戳
             String token = MD5Util.encode(username + password + now);
-            redisUtil.set(token, username, HappymallConstant.TOKEN_EXPIRE_TIME);
-            redisUtil.set(username, token, HappymallConstant.TOKEN_EXPIRE_TIME);
-            redisUtil.set(token + username, now, HappymallConstant.TOKEN_EXPIRE_TIME);
+            redisUtil.set(token, username, HappymallConstant.Token.TOKEN_EXPIRE_TIME);
+            redisUtil.set(username, token, HappymallConstant.Token.TOKEN_EXPIRE_TIME);
+            redisUtil.set(token + username, now, HappymallConstant.Token.TOKEN_EXPIRE_TIME);
             result = ResponseDTO.success(token);
         } catch (HappymallSystemException e) {
             result = ResponseDTO.error(e);
@@ -55,8 +56,8 @@ public class UserController {
     @ApiOperation(value = "用户登出接口")
     @PostMapping(value = "logout")
     public ResponseDTO logout(@ApiIgnore HttpServletRequest request) {
-        String token = request.getHeader(HappymallConstant.USER_TOKEN);
-        String username = (String) request.getAttribute(HappymallConstant.REQUEST_CURRENT_KEY);
+        String token = request.getHeader(HappymallConstant.Token.USER_TOKEN);
+        String username = (String) request.getAttribute(HappymallConstant.Token.REQUEST_CURRENT_KEY);
         redisUtil.del(username, token, token + username);
         return ResponseDTO.success();
     }
@@ -116,7 +117,7 @@ public class UserController {
     @ApiOperation(value = "获取用户信息")
     @GetMapping(value = "getUserInfo")
     public ResponseDTO getUserInfo(@ApiIgnore HttpServletRequest request) {
-        String username = (String) request.getAttribute(HappymallConstant.REQUEST_CURRENT_KEY);
+        String username = (String) request.getAttribute(HappymallConstant.Token.REQUEST_CURRENT_KEY);
         return ResponseDTO.success(userService.getUserInfo(username));
     }
 
@@ -186,7 +187,7 @@ public class UserController {
     public ResponseDTO updatePassword(@ApiIgnore HttpServletRequest request,
                                       @RequestParam String oldPassword,
                                       @RequestParam String newPassword) {
-        String username = (String) request.getAttribute(HappymallConstant.REQUEST_CURRENT_KEY);
+        String username = (String) request.getAttribute(HappymallConstant.Token.REQUEST_CURRENT_KEY);
         ResponseDTO result;
         try {
             userService.updatePassword(username, oldPassword, newPassword);
@@ -201,7 +202,7 @@ public class UserController {
     @PostMapping(value = "updateInformation")
     public ResponseDTO updateInformation(@ApiIgnore HttpServletRequest request,
                                          @ApiParam(name = "user", value = "用户信息", required = true) @RequestBody UserDTO user) {
-        String username = (String) request.getAttribute(HappymallConstant.REQUEST_CURRENT_KEY);
+        String username = (String) request.getAttribute(HappymallConstant.Token.REQUEST_CURRENT_KEY);
         ResponseDTO result;
         try {
             user.setUsername(username);
@@ -213,5 +214,17 @@ public class UserController {
         return result;
     }
 
+    @ApiOperation(value = "校验是否是管理员")
+    @PostMapping(value = "checkAdminRole")
+    public ResponseDTO checkAdminRole(@ApiIgnore HttpServletRequest request) {
+        String username = (String) request.getAttribute(HappymallConstant.Token.REQUEST_CURRENT_KEY);
+        ResponseDTO result;
+        if (userService.getUserInfo(username).getRoleId() == HappymallConstant.Role.ADMINSTRATOR) {
+            result = ResponseDTO.success(true);
+        } else {
+            result = ResponseDTO.success(false);
+        }
+        return result;
+    }
 
 }
