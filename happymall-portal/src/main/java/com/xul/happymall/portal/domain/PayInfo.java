@@ -89,14 +89,4 @@ class PayInfo extends BaseModel {
         this.platformStatus = platformStatus;
     }
 
-    @Override
-    public String toString() {
-        return "PayInfo{" +
-                "userId=" + userId +
-                ", orderNo=" + orderNo +
-                ", payPlatformType=" + payPlatformType +
-                ", platformNumber='" + platformNumber + '\'' +
-                ", platformStatus='" + platformStatus + '\'' +
-                '}';
-    }
 }

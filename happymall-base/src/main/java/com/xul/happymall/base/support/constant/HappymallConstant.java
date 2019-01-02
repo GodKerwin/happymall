@@ -9,10 +9,10 @@ public class HappymallConstant {
     public static final String TABLE_NAME_PREFIX = "happymall_";
 
     public interface Role {
-        //普通用户，需要与角色表联动
+        //普通用户，与角色表联动
         int DEFAULF_ROLE = 1;
 
-        //超级管理员，需要与角色表联动
+        //超级管理员，与角色表联动
         int ADMINSTRATOR = 2;
     }
 

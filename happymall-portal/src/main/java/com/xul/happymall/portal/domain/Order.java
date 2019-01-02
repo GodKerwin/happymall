@@ -176,20 +176,4 @@ class Order extends BaseModel {
         this.closeTime = closeTime;
     }
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "orderNo='" + orderNo + '\'' +
-                ", userId=" + userId +
-                ", addressId=" + addressId +
-                ", payment=" + payment +
-                ", paymentType=" + paymentType +
-                ", postage=" + postage +
-                ", orderStatus=" + orderStatus +
-                ", paymentTime=" + paymentTime +
-                ", sendTime=" + sendTime +
-                ", endTime=" + endTime +
-                ", closeTime=" + closeTime +
-                '}';
-    }
 }

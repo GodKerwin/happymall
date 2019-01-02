@@ -1,4 +1,4 @@
-package com.xul.happymall.admin.support.config;
+package com.xul.happymall.portal.support.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,24 +16,24 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Configuration
 @EnableSwagger2
-public class Swagger2Config {
+public class Swagger2Configuration {
 
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.xul.happymall.admin.web"))
+                .apis(RequestHandlerSelectors.basePackage("com.xul.happymall.portal.web"))
                 .paths(PathSelectors.any())
                 .build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Happymall-admin接口文档")
+                .title("Happymall-portal接口文档")
                 .contact(new Contact("Xul", "http://www.baidu.com", "513624876@qq.com"))
                 .version("1.0.0")
-                .description("Happymall-admin RESTful API")
+                .description("Happymall-portal RESTful API")
                 .build();
     }
 

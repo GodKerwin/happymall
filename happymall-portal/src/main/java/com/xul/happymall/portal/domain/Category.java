@@ -75,13 +75,4 @@ class Category extends BaseModel {
         this.sortOrder = sortOrder;
     }
 
-    @Override
-    public String toString() {
-        return "Category{" +
-                "parentId=" + parentId +
-                ", name='" + name + '\'' +
-                ", activeStatus=" + activeStatus +
-                ", sortOrder=" + sortOrder +
-                '}';
-    }
 }

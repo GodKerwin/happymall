@@ -46,11 +46,4 @@ public class Role extends BaseModel {
         this.activeStatus = activeStatus;
     }
 
-    @Override
-    public String toString() {
-        return "Role{" +
-                "name='" + name + '\'' +
-                ", activeStatus=" + activeStatus +
-                '}';
-    }
 }

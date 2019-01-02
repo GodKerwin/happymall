@@ -130,17 +130,4 @@ public class User extends BaseModel {
         this.lastLoginTime = lastLoginTime;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", question='" + question + '\'' +
-                ", answer='" + answer + '\'' +
-                ", roleId=" + roleId +
-                ", lastLoginTime=" + lastLoginTime +
-                '}';
-    }
 }

@@ -42,22 +42,22 @@ class Address extends BaseModel {
     private String receiverMobile;
 
     /**
-     * 省份
+     * 省份编码
      */
-    @Column(name = "receiverProvince", columnDefinition = "varchar(20) DEFAULT NULL COMMENT '省份'")
-    private String receiverProvince;
+    @Column(name = "receiverProvinceCode", columnDefinition = "int(11) DEFAULT NULL COMMENT '省份编码'")
+    private Integer receiverProvinceCode;
 
     /**
-     * 城市
+     * 城市编码
      */
-    @Column(name = "receiverCity", columnDefinition = "varchar(20) DEFAULT NULL COMMENT '城市'")
-    private String receiverCity;
+    @Column(name = "receiverCityCode", columnDefinition = "int(11) DEFAULT NULL COMMENT '城市编码'")
+    private Integer receiverCityCode;
 
     /**
-     * 区/县
+     * 区/县编码
      */
-    @Column(name = "receiverDistrict", columnDefinition = "varchar(20) DEFAULT NULL COMMENT '区/县'")
-    private String receiverDistrict;
+    @Column(name = "receiverDistrictCode", columnDefinition = "int(11) DEFAULT NULL COMMENT '区/县编码'")
+    private Integer receiverDistrictCode;
 
     /**
      * 详细地址
@@ -103,28 +103,28 @@ class Address extends BaseModel {
         this.receiverMobile = receiverMobile;
     }
 
-    public String getReceiverProvince() {
-        return receiverProvince;
+    public Integer getReceiverProvinceCode() {
+        return receiverProvinceCode;
     }
 
-    public void setReceiverProvince(String receiverProvince) {
-        this.receiverProvince = receiverProvince;
+    public void setReceiverProvinceCode(Integer receiverProvinceCode) {
+        this.receiverProvinceCode = receiverProvinceCode;
     }
 
-    public String getReceiverCity() {
-        return receiverCity;
+    public Integer getReceiverCityCode() {
+        return receiverCityCode;
     }
 
-    public void setReceiverCity(String receiverCity) {
-        this.receiverCity = receiverCity;
+    public void setReceiverCityCode(Integer receiverCityCode) {
+        this.receiverCityCode = receiverCityCode;
     }
 
-    public String getReceiverDistrict() {
-        return receiverDistrict;
+    public Integer getReceiverDistrictCode() {
+        return receiverDistrictCode;
     }
 
-    public void setReceiverDistrict(String receiverDistrict) {
-        this.receiverDistrict = receiverDistrict;
+    public void setReceiverDistrictCode(Integer receiverDistrictCode) {
+        this.receiverDistrictCode = receiverDistrictCode;
     }
 
     public String getReceiverAddress() {
@@ -143,18 +143,4 @@ class Address extends BaseModel {
         this.receiverZip = receiverZip;
     }
 
-    @Override
-    public String toString() {
-        return "Address{" +
-                "userId=" + userId +
-                ", receiverName='" + receiverName + '\'' +
-                ", receiverPhone='" + receiverPhone + '\'' +
-                ", receiverMobile='" + receiverMobile + '\'' +
-                ", receiverProvince='" + receiverProvince + '\'' +
-                ", receiverCity='" + receiverCity + '\'' +
-                ", receiverDistrict='" + receiverDistrict + '\'' +
-                ", receiverAddress='" + receiverAddress + '\'' +
-                ", receiverZip='" + receiverZip + '\'' +
-                '}';
-    }
 }

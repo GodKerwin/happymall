@@ -146,18 +146,4 @@ class Product extends BaseModel {
         this.activeStatus = activeStatus;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "categoryId=" + categoryId +
-                ", name='" + name + '\'' +
-                ", subtitle='" + subtitle + '\'' +
-                ", mainImage='" + mainImage + '\'' +
-                ", subImages='" + subImages + '\'' +
-                ", detail='" + detail + '\'' +
-                ", price=" + price +
-                ", stock=" + stock +
-                ", activeStatus=" + activeStatus +
-                '}';
-    }
 }

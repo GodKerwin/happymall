@@ -1,9 +1,9 @@
 package com.xul.happymall.base.domain;
 
 import com.xul.happymall.base.enums.DelStatus;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -79,11 +79,6 @@ public class BaseModel implements Serializable {
 
     @Override
     public String toString() {
-        return "BaseModel{" +
-                "id=" + id +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                ", delStatus=" + delStatus +
-                '}';
+        return ToStringBuilder.reflectionToString(this);
     }
 }

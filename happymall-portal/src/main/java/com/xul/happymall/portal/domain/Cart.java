@@ -75,13 +75,4 @@ class Cart extends BaseModel {
         this.activeStatus = activeStatus;
     }
 
-    @Override
-    public String toString() {
-        return "Cart{" +
-                "userId=" + userId +
-                ", productId=" + productId +
-                ", quantity=" + quantity +
-                ", activeStatus=" + activeStatus +
-                '}';
-    }
 }

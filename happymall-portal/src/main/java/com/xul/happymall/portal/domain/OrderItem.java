@@ -131,17 +131,4 @@ class OrderItem extends BaseModel {
         this.totalPrice = totalPrice;
     }
 
-    @Override
-    public String toString() {
-        return "OrderItem{" +
-                "orderNo='" + orderNo + '\'' +
-                ", userId=" + userId +
-                ", productId=" + productId +
-                ", productName='" + productName + '\'' +
-                ", productImage='" + productImage + '\'' +
-                ", currentUnitPrice=" + currentUnitPrice +
-                ", quantity=" + quantity +
-                ", totalPrice=" + totalPrice +
-                '}';
-    }
 }
