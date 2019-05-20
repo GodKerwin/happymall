@@ -1,5 +1,4 @@
 mysqlServer:
   server: localhost:3306
   username: root
-  password: QTMgzeWmx5lzLbRUrScWWLCMhPXwdx3+OKECs4YcU7Ovj+T27kEHZgun9lyTHDuoI9ETkGlIi7ym7XWqT/EXEQ==
-  publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJo8RXWa88I03HCJ0wmnZC0IQsHrIO+WHCs2OwaEqEzCfJv+2M6o4vxPVn4Qy2czR5jQecm++vzMyKY1UYc5yRsCAwEAAQ==
+  password: rootroot
