@@ -1,63 +1,75 @@
 apply from: "config.gradle"
+
+//插件地址
 buildscript {
     ext {
-        springBootVersion = '1.5.9.RELEASE'
+        springBootVersion = '2.1.5.RELEASE'
     }
     repositories {
         maven {
             url 'http://maven.aliyun.com/nexus/content/groups/public/'
         }
-        mavenCentral()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
 
+//配置所有项目
 allprojects {
+
+    //应用插件
     apply plugin: 'java'
     apply plugin: 'idea'
     apply plugin: 'org.springframework.boot'
+
+    //公共属性
+    group 'com.xul'
+    version '1.0-SNAPSHOT'
+
+    //编译属性
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 
     // java编译的时候缺省状态下会因为中文字符而失败
     [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
 
+}
+
+//构建依赖
+subprojects {
+
     repositories {
         maven {
             url 'http://maven.aliyun.com/nexus/content/groups/public/'
         }
         mavenCentral()
+        mavenLocal()
     }
 
     dependencies {
         compile(
                 //springboot官方包
-                "org.springframework.boot:spring-boot-starter-web",
-                "org.springframework.boot:spring-boot-starter-data-jpa",
-                "org.springframework.boot:spring-boot-starter-aop",
-                "org.springframework.boot:spring-boot-starter-data-redis",
-                //session
-                "org.springframework.session:spring-session-data-redis",
+                "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
+                "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}",
+                "org.springframework.boot:spring-boot-starter-aop:${springBootVersion}",
+                "org.springframework.boot:spring-boot-starter-data-redis:${springBootVersion}",
                 //mysql数据库
-                "org.mybatis.spring.boot:mybatis-spring-boot-starter:${MYBATIS_VERSION}",
-                "mysql:mysql-connector-java",
-                //alibaba的druid数据库连接池
-                "com.alibaba:druid-spring-boot-starter:${DRUID_VERSION}",
-                //邮件
-                "javax.mail:mail:${JAVAX_MAIL_VERSION}",
+                "org.mybatis.spring.boot:mybatis-spring-boot-starter:${mybatisVersion}",
+                "mysql:mysql-connector-java:${mysqlVersion}",
                 //json
-                "com.alibaba:fastjson:${FASTJSON_VERSION}",
+                "com.alibaba:fastjson:${fastjsonVersion}",
                 //工具
-                "org.apache.commons:commons-lang3:${APACHE_VERSION}",
+                "org.apache.commons:commons-lang3:${apacheVersion}",
                 //swagger接口文档
-                "io.springfox:springfox-swagger-ui:${SWAGGER_VERSION}",
-                "io.springfox:springfox-swagger2:${SWAGGER_VERSION}",
+                "io.springfox:springfox-swagger-ui:${swaggerVersion}",
+                "io.springfox:springfox-swagger2:${swaggerVersion}",
         )
         testCompile(
-                "org.springframework.boot:spring-boot-starter-test",
-                "junit:junit:${JUNIT_VERSION}"
+                "org.springframework.boot:spring-boot-starter-test:${springBootVersion}",
+                "junit:junit:${junitVersion}"
         )
     }
 }
+
+

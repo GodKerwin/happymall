@@ -1,5 +1,9 @@
 rootProject.name = 'happymall'
-include 'happymall-base'
-include 'happymall-portal'
 include 'happymall-admin'
+include 'happymall-dao'
+include 'happymall-repository'
+include 'happymall-domain'
+include 'happymall-service'
+include 'happymall-support'
+include 'happymall-web'
 

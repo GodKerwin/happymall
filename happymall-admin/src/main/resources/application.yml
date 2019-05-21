@@ -1,6 +1,7 @@
 server:
-  port: 9004
-  context-path: /happymall/admin/
+  port: 9002
+  servlet:
+    context-path: /happymall/admin/
 
 spring:
   profiles:
@@ -35,6 +36,9 @@ spring:
     show-sql: true
   session:
     store-type: redis
+  redis:
+    host: ${redisServer.host}
+    port: ${redisServer.port}
 
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
@@ -44,4 +48,3 @@ mybatis:
       map-underscore-to-camel-case: true
       default-fetch-size: 100
       default-statement-timeout: 30
-
